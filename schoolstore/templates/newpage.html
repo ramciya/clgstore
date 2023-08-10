@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title> DETAILS FORM</title>
+</head>
+<style>
+body{
+  font-family: Calibri, Helvetica, sans-serif;
+  background-color: yellow;
+}
+.container {
+    padding: 50px;
+  background-color: lightblue;
+}
+
+input[type=text], input[type=password], textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus {
+  background-color: orange;
+outline: none;
+}
+ div {
+            padding: 10px 0;
+     }
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity: 1;
+}
+</style>
+
+<h1>DETAILS FORM</h1>
+  <form action="" method="post">
+   {% csrf_token %}
+<label>Name:</label>
+    <input type="text" name="Name" placeholder="Enter your name"><br><br>
+     <label>
+      Date Of Birth:
+         </label>
+     <input type="text" name="dob" placeholder="Enter your DOB"><br><br>
+      <label>Age:</label>
+
+     <input type="text" name="age" placeholder="enter your age"><br><br>
+      <label>Gender:</label>
+    <input type="radio" value="Male" name="gender" checked > Male
+    <input type="radio" value="Female" name="gender"> Female
+    <input type="radio" value="Other" name="gender"> Other<br>
+     <br>
+
+      <label>Phonenumber:</label>
+     <input type="text" name="phonenumber" placeholder="Enter your phonenumber"><br><br>
+      <label>MailId</label>
+     <input type="text" name="mailid" placeholder="enter your mailid"><br><br>
+      <label>Address</label>
+      <textarea cols="50" rows="5" name="address" placeholder="Enter your address"></textarea><br><br>
+<script>
+      var subjectObject = {
+      "Technical": {
+           "degree": ["B.Tech", "Computer programming", "IT", "DataScience"],
+            "pg": ["M.Tech", "MSC", "Technical writing", "MLIE"]
+        },
+  "Non-technical": {
+    "Degree": ["BSC", "BCA", "BCOM"],
+    "Pg": ["MSC", "MCA", "MCOM"]
+  }
+}
+window.onload = function() {
+  var subjectSel = document.getElementById("subject");
+  var topicSel = document.getElementById("topic");
+  var chapterSel = document.getElementById("chapter");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    chapterSel.length = 1;
+    topicSel.length = 1;
+    //display correct values
+    for (var y in subjectObject[this.value]) {
+      topicSel.options[topicSel.options.length] = new Option(y, y);
+    }
+  }
+  topicSel.onchange = function() {
+    //empty Chapters dropdown
+    chapterSel.length = 1;
+    //display correct values
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+
+<form name="form1" id="form1" action="/action_page.php">
+Departments: <select name="subject" id="subject">
+    <option value="" selected="selected">Select Department</option>
+  </select>
+  <br><br>
+Courses: <select name="topic" id="topic">
+    <option value="" selected="selected">Please select course first</option>
+  </select>
+  <br><br>
+Stream: <select name="chapter" id="chapter">
+    <option value="" selected="selected">Please select stream</option>
+  </select>
+  <br><br>
+</script>
+</form>
+<label>
+         Purpose:
+     </label>
+      <select>
+          <option value="purpose">purpose</option>
+          <option value="enquiry">Enquiry</option>
+          <option value="placeorder">Place Order</option>
+          <option value="return">Return</option>
+
+      </select><br>
+    <label>
+        Materials:
+    </label><br>
+     <input type="checkbox" name="material1">Notebooks<br>
+      <input type="checkbox" name="material2">pen<br>
+      <input type="checkbox" name="material3">pencil<br>
+      <input type="checkbox" name="material4">minidrafter<br>
+       <button onclick="myfunction()">Submitt</button>
+       <script>
+           function myfunction(){
+            confirm("order is confirmed!");
+
+
+            }
+
+       </script>
+      <a href="/"><input type="button" value="Logout" name="Logout"><br></a>
+     <a href="/">home</a>
+</div>
+</form>
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+</body>
+</html>
